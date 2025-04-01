@@ -53,17 +53,3 @@ CREATE TABLE comentarios (
     FOREIGN KEY (id_usuario) REFERENCES users(id),
     FOREIGN KEY (id_avaliacao) REFERENCES avaliacoes(id)
 );
-
-
-
-
-
-
- 
- 
- 
- 
- 
- 
- 
-
