@@ -25,7 +25,7 @@ CREATE TABLE obras (
     ano_lancamento YEAR NOT NULL,
     genero VARCHAR(50) NOT NULL,
     sinopse TEXT CHECK(CHAR_LENGTH(sinopse) BETWEEN 1 AND 2000) NOT NULL,
-    nota_critica DECIMAL(2,1) UNSIGNED
+    nota_critica DECIMAL(2,1)
       CHECK (nota_critica BETWEEN 1 AND 5 AND nota_critica * 2 = FLOOR(nota_critica*2)),
     id_plataforma INT UNSIGNED NOT NULL,
     FOREIGN KEY (id_plataforma) REFERENCES plataforma(id)
@@ -33,7 +33,7 @@ CREATE TABLE obras (
 
 CREATE TABLE avaliacoes (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    nota DECIMAL(2,1) UNSIGNED NOT NULL 
+    nota DECIMAL(2,1) NOT NULL 
       CHECK (nota BETWEEN 1 AND 5 AND nota * 2 = FLOOR(nota * 2)),
     texto TEXT CHECK(CHAR_LENGTH(texto) BETWEEN 1 AND 4000),
     data_avaliacao DATETIME DEFAULT CURRENT_TIMESTAMP,
