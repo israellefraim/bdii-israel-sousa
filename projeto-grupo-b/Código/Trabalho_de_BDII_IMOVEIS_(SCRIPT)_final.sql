@@ -9,6 +9,16 @@ CREATE TABLE IMOVEL (
     propret TEXT,
     valor DECIMAL(12,2)
 );
+
+ALTER TABLE
+ADD CONSTRAINT check_id_imovel 
+CHECK (id_imovel > 1);
+
+ALTER TABLE IMOVEL
+ADD CONSTRAINT check_endereco
+CHECK (UPPER(endereco) REGEXP '/ (AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO)$');
+
+
 INSERT INTO IMOVEL (id_imovel, endereco, tipo, propret, valor) VALUES (6380, 'Condomínio de Rodrigues, 9, São Geraldo, 85846-629 Santos do Norte / SC', 'Loja', 'Francisco Rezende', 627762.51);
 INSERT INTO IMOVEL (id_imovel, endereco, tipo, propret, valor) VALUES (9081, 'Pátio de Duarte, 16, Vila Aeroporto, 47809778 Cardoso / TO', 'Apartamento', 'Clarice Carvalho', 305865.35);
 INSERT INTO IMOVEL (id_imovel, endereco, tipo, propret, valor) VALUES (5852, 'Vale Vargas, 81, Vitoria, 00618-964 Caldeira de Goiás / BA', 'Casa', 'Maria Flor Freitas', 300915.74);
@@ -254,6 +264,16 @@ CREATE TABLE IMOBILIARIA (
     email VARCHAR(100),
     aval INT check (aval BETWEEN 1 AND 5) 
 );
+
+ALTER TABLE IMOBILIARIA
+ADD CONSTRAINT check_cnpj 
+CHECK (cnpj > 1);
+
+ALTER TABLE IMOBILIARIA
+ADD CONSTRAINT check_email
+CHECK (email LIKE '%@%');
+
+
 INSERT INTO IMOBILIARIA (cnpj, nome, ende, email, aval) VALUES (4970, 'Cassiano', 'Aeroporto de Guerra, Acaiaca, 60150472 Silva / PI', 'rochaapollo@example.net', 1);
 INSERT INTO IMOBILIARIA (cnpj, nome, ende, email, aval) VALUES (0161, 'Silva', 'Praça Camargo, 43, Conjunto Bonsucesso, 56312871 da Rosa / SP', 'heitorcasa-grande@example.org', 2);
 INSERT INTO IMOBILIARIA (cnpj, nome, ende, email, aval) VALUES (4522, 'Vargas e Filhos', 'Alameda Murilo Viana, 5, Alípio De Melo, 54067-969 Câmara da Prata / RR', 'casa-grandearthur-miguel@example.com', 1);
@@ -566,6 +586,16 @@ CREATE TABLE REGISTRO (
     FOREIGN KEY (id_imovel) REFERENCES IMOVEL(id_imovel),
     FOREIGN KEY (cnpj) REFERENCES IMOBILIARIA(cnpj)
 );
+
+ALTER TABLE
+ADD CONSTRAINT check_id_registro
+CHECK (id_registro > 1);
+
+ALTER TABLE
+ADD CONSTRAINT check_data_registro
+CHECK (data_registro >= '2025-01-01');
+
+
 INSERT INTO REGISTRO (id_registro, data_registro, local, preco) VALUES (595, '2026-01-29', 'Parque Sol', 3256);
 INSERT INTO REGISTRO (id_registro, data_registro, local, preco) VALUES (323, '2026-12-05', 'Jardim América', 5430);
 INSERT INTO REGISTRO (id_registro, data_registro, local, preco) VALUES (671, '2026-07-25', 'Parque Estrela', 3688);
@@ -876,6 +906,15 @@ CREATE TABLE ANUNCIA (
     FOREIGN KEY (cnpj) REFERENCES IMOBILIARIA(cnpj)
 );
 
+ALTER TABLE ANUNCIA
+ADD CONSTRAINT check_data_anuncio
+CHECK (data_anuncio >= '2021-01-01');
+
+ALTER TABLE ANUNCIA
+ADD CONSTRAINT check_id_imovel
+CHECK (id_imovel > 0);
+
+
 CREATE TABLE SITE (
     url VARCHAR(100) PRIMARY KEY,
     nome VARCHAR(100),
@@ -883,6 +922,15 @@ CREATE TABLE SITE (
     descri TEXT,
     id int 
 );
+
+ALTER TABLE SITE
+ADD CONSTRAINT check_id_positivo
+CHECK (id > 0);
+
+ALTER TABLE SITE
+ADD CONSTRAINT check_email_valido
+CHECK (emailcontt LIKE '%@%');
+
 INSERT INTO SITE (url, id, nome, emailcontt, descri) VALUES ('nvu0q', 526, 'Djime', 'djime@gmail.com', 'Teste online web comunidade site blog teste.');
 INSERT INTO SITE (url, id, nome, emailcontt, descri) VALUES ('0tzh9eo7x', 146, 'Ousinesbw', 'ousinesbw@gmail.com', 'Portal blog plataforma blog teste site desenvolvimento.');
 INSERT INTO SITE (url, id, nome, emailcontt, descri) VALUES ('f0gdf', 134, 'Ssatdskt', 'ssatdskt@gmail.com', 'Rede digital site tecnologia digital digital dados.');
@@ -1194,6 +1242,15 @@ CREATE TABLE ENTREGA (
     FOREIGN KEY (cnpj) REFERENCES IMOBILIARIA(cnpj)
 );
 
+ALTER TABLE ENTREGA
+ADD CONSTRAINT check_data_entrega
+CHECK (data_entrega >= '2021-01-01');
+
+ALTER TABLE ENTREGA
+ADD CONSTRAINT check_cnpj_positivo
+CHECK (cnpj > 0);
+
+
 CREATE TABLE CLIENTE (
     cpf VARCHAR(14) PRIMARY KEY UNIQUE,
     nome VARCHAR(100),
@@ -1201,6 +1258,16 @@ CREATE TABLE CLIENTE (
     email VARCHAR(100),
     senha VARCHAR(100)
 );
+
+ALTER TABLE CLIENTE
+ADD CONSTRAINT check_email_valido_cliente
+CHECK (email LIKE '%@%');
+
+ALTER TABLE CLIENTE
+ADD CONSTRAINT check_senha_minima
+CHECK (CHAR_LENGTH(senha) >= 6);
+
+
 INSERT INTO CLIENTE (cpf, nome, ende, email, senha) VALUES ('41386720950', 'Enzo Mendes', 'Colônia de Guerra, Buritis, 24091970 Cavalcanti do Norte / ES', 'jda-paz@example.com', '^Dt3SB%i^*');
 INSERT INTO CLIENTE (cpf, nome, ende, email, senha) VALUES ('25134789673', 'Theodoro Sales', 'Passarela Monteiro, 243, Jaraguá, 17030146 Costa / ES', 'usa@example.com', 'r2X+qC$n_W');
 INSERT INTO CLIENTE (cpf, nome, ende, email, senha) VALUES ('69574180220', 'Luiz Gustavo Moura', 'Alameda Liz Porto, 22, São Cristóvão, 04237-661 Silva / RS', 'joaopires@example.com', 'G&3Kh4xK6f');
@@ -1511,6 +1578,16 @@ CREATE TABLE PROPOSTA (
     emailcontt VARCHAR(100),
     resgprost VARCHAR(100)
 );
+
+ALTER TABLE PROPOSTA
+ADD CONSTRAINT check_valor_positivo
+CHECK (valor > 0);
+
+ALTER TABLE PROPOSTA
+ADD CONSTRAINT chk_resgprost_valido
+CHECK (resgprost IN ('Aceita', 'Recusada', 'Em Análise'));
+
+
 INSERT INTO PROPOSTA (id_proposta, valor, dat, proponente, emailcontt, resgprost) VALUES (1130, 213737.45, '2024-07-27', 'Sr. Pedro da Costa', 'ana-laura31@example.org', 'Recusada');
 INSERT INTO PROPOSTA (id_proposta, valor, dat, proponente, emailcontt, resgprost) VALUES (6411, 472203.42, '2022-12-09', 'Isaque Fogaça', 'psilva@example.org', 'Aceita');
 INSERT INTO PROPOSTA (id_proposta, valor, dat, proponente, emailcontt, resgprost) VALUES (5682, 295209.81, '2023-10-22', 'Maria Júlia da Mata', 'vinicius72@example.net', 'Recusada');
@@ -1821,6 +1898,15 @@ CREATE TABLE FAZ (
     FOREIGN KEY (id_proposta) REFERENCES PROPOSTA(id_proposta)
 );
 
+ALTER TABLE FAZ
+ADD CONSTRAINT check_cpf_nao_vazio
+CHECK (cpf <> '');
+
+ALTER TABLE FAZ
+ADD CONSTRAINT check_id_proposta_positivo
+CHECK (id_proposta > 0);
+
+
 CREATE TABLE COMPRA (
     id_compra INT PRIMARY KEY auto_increment,
     id_proposta INT,
@@ -1832,6 +1918,16 @@ CREATE TABLE COMPRA (
     FOREIGN KEY (id_proposta) REFERENCES PROPOSTA(id_proposta),
     FOREIGN KEY (id_imovel) REFERENCES IMOVEL(id_imovel)
 );
+
+ALTER TABLE COMPRA
+ADD CONSTRAINT check_valpag_positivo
+CHECK (valpag > 0);
+
+ALTER TABLE COMPRA
+ADD CONSTRAINT check_data_compra
+CHECK (data_compra <= CURDATE());
+
+
 INSERT INTO COMPRA (valpag, nomecomprad, metpag) VALUES (270164.4, 'Pedro Henrique', 'Cartão de Débito');
 INSERT INTO COMPRA (valpag, nomecomprad, metpag) VALUES (253386.79, 'Rafael Santos', 'PIX');
 INSERT INTO COMPRA (valpag, nomecomprad, metpag) VALUES (545225.57, 'André Silva', 'Cartão de Débito');
