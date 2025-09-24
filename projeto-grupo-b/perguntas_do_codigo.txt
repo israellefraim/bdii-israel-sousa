@@ -1,0 +1,29 @@
+IMOVEL
+Pergunta: Quais imóveis do tipo "Casa" estão disponíveis com valor acima de R$ 500.000, ordenados pelo valor decrescente?
+
+IMOBILIARIA
+Pergunta: Quais imobiliárias possuem avaliação 5 estrelas, ordenadas por nome?
+
+REGISTRO
+Pergunta: Quais registros foram feitos no "Parque Sol" com preço superior a R$ 3.000, ordenados por data?
+
+ANUNCIA
+Pergunta: Quais são os anúncios realizados a partir de 2023?
+
+SITE
+Pergunta: Quais sites possuem "blog" na descrição?
+
+ENTREGA
+Pergunta: Quais entregas foram realizadas no ano de 2022?
+
+CLIENTE
+Pergunta: Quais clientes possuem email do domínio "example.org"?
+
+PROPOSTA
+Pergunta: Quais propostas foram "Aceitas" com valor acima de R$ 300.000?
+
+FAZ
+Pergunta: Quais associações entre clientes e propostas existem no sistema?
+
+COMPRA
+Pergunta: Quais compras foram pagas com "Cartão de Débito" e tiveram valor superior a R$ 300.000?
